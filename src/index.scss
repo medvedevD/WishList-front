@@ -24,8 +24,40 @@
     &__sidebar {
         background-color: #F1F1F1;
         width: 200px;
-        height: 100%;
+        height: calc(100% - 120px);
         border-right: 1px solid #F1F1F1;
         padding: 60px 20px;
+    }
+
+
+}
+
+.field {
+    background: #FFFFFF;
+    border: 1px solid #EFEFEF;
+    box-sizing: border-box;
+    border-radius: 4px;
+    padding: 8px 12px;
+    width: 100%;
+
+    &:focus {
+        border-color: #c7c4c4;
+    }
+}
+
+.button {
+    background: #4DD599;
+    border-radius: 4px;
+    color: #fff;
+    border:0;
+    padding: 10px 20px;
+    cursor: pointer;
+
+    &:hover{
+        background: darken( #4DD599, 7%);
+    }
+
+    &:active{
+        background: darken( #4DD599, 12%);
     }
 }

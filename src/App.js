@@ -1,5 +1,8 @@
 import React from "react";
 import Categories from "./components/Categories";
+import AddCategories from "./components/AddCategories";
+
+import DB from "./assets/db.json";
 
 function App() {
   return (
@@ -22,27 +25,29 @@ function App() {
                   />
                 </svg>
               ),
-              name: "Все желания",
-              active:true
+              name: "Все желания"
             }
           ]}
         />
         <Categories
           items={[
             {
-              color: 'green' ,
+              color: "green",
               name: "Покупки"
             },
             {
-              color: 'blue' ,
-              name: "Путешествия"
+              color: "blue",
+              name: "Путешествия",
+              active: true
             },
             {
-              color: 'pink' ,
+              color: "pink",
               name: "Образование"
             }
           ]}
+          isRemovable
         />
+        <AddCategories colors={DB.colors} />
       </div>
       <div className="wish__list"></div>
     </div>
