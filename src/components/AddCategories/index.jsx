@@ -6,11 +6,20 @@ import closeSvg from "../../assets/img/close.svg";
 
 import "./AddCategories.scss";
 
-const AddCategories = ({ colors }) => {
+const AddCategories = ({ colors, onAdd }) => {
   const [visibleForm, setVisibleForm] = useState(false);
   const [selectedColor, selectColor] = useState(colors[0].id);
+  const [inputValue, setInputValue] = useState("");
+  
 
-  console.log(selectedColor);
+  const addCategory = () => {
+    if (!inputValue) {
+      alert("Введите название категории");
+      return;
+    }
+    const color = colors.filter(c => c.id === selectedColor)[0].name;
+    onAdd({ id: Math.random, name: inputValue, color });
+  };
 
   return (
     <div className="add-categories">
@@ -50,12 +59,14 @@ const AddCategories = ({ colors }) => {
       {visibleForm && (
         <div className="add-categories__form">
           <img
-          onClick={() => setVisibleForm(false)}
+            onClick={() => setVisibleForm(false)}
             src={closeSvg}
             alt="close"
             className="add-categories__form-close-btn"
           />
           <input
+            value={inputValue}
+            onChange={e => setInputValue(e.target.value)}
             className="field"
             type="text"
             placeholder="Название категории"
@@ -70,7 +81,9 @@ const AddCategories = ({ colors }) => {
               />
             ))}
           </div>
-          <button className="button">Добавить</button>
+          <button onClick={addCategory} className="button">
+            Добавить
+          </button>
         </div>
       )}
     </div>

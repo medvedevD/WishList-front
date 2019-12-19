@@ -1,10 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import Categories from "./components/Categories";
 import AddCategories from "./components/AddCategories";
 
 import DB from "./assets/db.json";
 
 function App() {
+  const [categories, setCategories] = useState(
+    DB.categories.map(item => {
+      item.color = DB.colors.filter(color => color.id === item.colorId)[0].name;
+      return item;
+    })
+  );
+
+  const onAddCategory = obj => {
+    const newCategory = [...categories, obj];
+    setCategories(newCategory);
+  };
+
   return (
     <div className="wish">
       <div className="wish__sidebar">
@@ -29,25 +41,8 @@ function App() {
             }
           ]}
         />
-        <Categories
-          items={[
-            {
-              color: "green",
-              name: "Покупки"
-            },
-            {
-              color: "blue",
-              name: "Путешествия",
-              active: true
-            },
-            {
-              color: "pink",
-              name: "Образование"
-            }
-          ]}
-          isRemovable
-        />
-        <AddCategories colors={DB.colors} />
+        <Categories items={categories} isRemovable />
+        <AddCategories onAdd={onAddCategory} colors={DB.colors} />
       </div>
       <div className="wish__list"></div>
     </div>
